@@ -64,8 +64,10 @@ public class Traitement implements java.io.Serializable {
             is = socket.getInputStream();
             ois = new ObjectInputStream(is);
             boolean isconnect = ois.readBoolean();
+            //regarde si l'utiliateur est conencté
             if (isconnect) {
                 System.out.println("true");
+                //on recupere le pieces
                 this.pieces = (Pieces) ois.readObject();
 //                System.out.println(pieces.listePieces.get(1).nom);
                 f.affichePieces(pieces);
@@ -83,6 +85,7 @@ public class Traitement implements java.io.Serializable {
         }
     }
 
+    //focntion appeler lorsque l'utilisateur clique sur reserver
     public Piece choixPieces(Object item) {
         for (int i = 0; i < this.pieces.listePieces.size(); i++) {
             if (item.toString().equalsIgnoreCase(this.pieces.listePieces.get(i).toString())) {
@@ -93,6 +96,7 @@ public class Traitement implements java.io.Serializable {
         return this.pieces.listePieces.get(0); // inutile return
     }
 
+    //envoi la reservation vers le serveur.
     public void newReservation(Piece pieceSelected, int nombreSelected) throws IOException {
         Reservation reservation = new Reservation(pieceSelected, nombreSelected);
         System.out.println(reservation.toString());

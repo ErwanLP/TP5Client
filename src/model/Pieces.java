@@ -29,6 +29,7 @@ public class Pieces implements Serializable
 
     }
 
+    //recupere les pieces de la base de donnée non utiliser en client
     public ResultSet getAllPieces(Connection conn) throws SQLException {
         try (Statement state = conn.createStatement(); ResultSet result = state.executeQuery("SELECT * FROM piece")) {
             while (result.next()) {
@@ -42,6 +43,7 @@ public class Pieces implements Serializable
         }
     }
 
+    // afiche les pieces dans la console
     public void afficheAllPiecesConsole() throws SQLException {
         String s;
         for (int i = 0; i < this.listePieces.size(); i++) {
